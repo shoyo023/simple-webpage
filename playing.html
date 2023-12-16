@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="LAP.png">
+    <title>SALES index</title>
+    <style>
+        body {
+            
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .graph-container {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+        }
+
+        .bar-container {
+            width: 80%;
+            max-width: 800px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        .bar {
+            height: 30px;
+            background-color: #4CAF50;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .bar-label-container {
+            display: flex;
+            justify-content: space-between;
+            margin: 10px;
+        }
+
+        .bar-label {
+            text-align: center;
+            flex-grow: 1;
+            padding: 5px;
+        }
+        nav {
+            background-color: #333;
+            padding: 10px;
+            width: 25%;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #555;
+        }
+
+
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="index.html">HOME</a>
+    </nav>
+
+    <div class="graph-container">
+        <div class="bar-label-container">
+            <div class="bar-label">ITEM 1</div>
+            <div class="bar-label">ITEM 2</div>
+            <div class="bar-label">ITEM 3</div>
+            <div class="bar-label">ITEM 4</div>
+            <div class="bar-label">ITEM 5</div>
+        </div>
+        <div class="bar-container">
+            <div class="bar" id="item1"></div>
+            <div class="bar" id="item2"></div>
+            <div class="bar" id="item3"></div>
+            <div class="bar" id="item4"></div>
+            <div class="bar" id="item5"></div>
+        </div>
+    </div>
+
+    <script>
+        function updateBars() {
+            // calc ng bars
+            const item1Sales = Math.floor(Math.random() * 100);
+            const item2Sales = Math.floor(Math.random() * 100);
+            const item3Sales = Math.floor(Math.random() * 100);
+            const item4Sales = Math.floor(Math.random() * 100);
+            const item5Sales = Math.floor(Math.random() * 100);
+
+        
+            document.getElementById('item1').style.width = item1Sales + '%';
+            document.getElementById('item2').style.width = item2Sales + '%';
+            document.getElementById('item3').style.width = item3Sales + '%';
+            document.getElementById('item4').style.width = item4Sales + '%';
+            document.getElementById('item5').style.width = item5Sales + '%';
+
+            // para mag update ung bars
+            setTimeout(updateBars, 1000);
+        }
+
+        
+        updateBars();
+    </script>
+</body>
+</html>

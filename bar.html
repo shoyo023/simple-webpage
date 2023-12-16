@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="LAP.png">
+    <title>Bar</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+            background-image: url('building.jpg');
+            background-size: cover;
+            background-position: center;
+        }
+
+        canvas {
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        nav {
+            background-color: #333;
+            padding: 10px;
+            width: 25%;
+            text-align: center;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            margin: 0 10px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        nav a:hover {
+            background-color: #d36262;
+        }
+    </style>
+</head>
+
+<body>
+    <nav>
+        <a href="index.html">HOME</a>
+    </nav>
+
+    <canvas id="salesGraph" width="900" height="400"></canvas>
+
+    <script>
+        const canvas = document.getElementById('salesGraph');
+        const ctx = canvas.getContext('2d');
+        const graphWidth = canvas.width;
+        const graphHeight = canvas.height;
+
+        const salesData = Array.from({ length: 100 }, () => Math.floor(Math.random() * 10000));
+        const labels = Array.from({ length: 15 }, (_, i) => (i + 1) * 1000).sort((a, b) => a - b);
+
+        let isPaused = false;
+        let offsetX = 0;
+
+        function updateSales() {
+            if (!isPaused) {
+                // change sa sales
+                const newSale = Math.floor(Math.random() * 10000);
+                salesData.push(newSale);
+                if (salesData.length > 100) {
+                    salesData.shift();
+                }
+
+                drawGraph();
+            }
+            // adjust ng time
+            setTimeout(updateSales, 100); 
+        }
+
+        function drawGraph() {
+            ctx.clearRect(0, 0, graphWidth, graphHeight);
+
+            ctx.beginPath();
+            ctx.moveTo(-offsetX, graphHeight / 2);
+            ctx.lineTo(graphWidth - offsetX, graphHeight / 2);
+            ctx.strokeStyle = '#ccc';
+            ctx.lineWidth = 1;
+            ctx.stroke();
+
+            ctx.beginPath();
+            ctx.moveTo(-offsetX, graphHeight - (salesData[0] / 100) * graphHeight);
+
+            for (let i = 1; i < salesData.length; i++) {
+                const x = ((i - offsetX) / salesData.length) * graphWidth;
+                const y = graphHeight - (salesData[i] / 10000) * graphHeight;
+                ctx.lineTo(x, y);
+
+                //display sa sales amount
+                ctx.fillStyle = '#333';
+                ctx.font = '12px Arial';
+                ctx.fillText(salesData[i], x, y - 5);
+            }
+    
+            // for labels
+            ctx.fillStyle = '#333';
+            ctx.font = '12px Arial';
+            for (let i = 0; i < labels.length; i++) {
+                const labelX = (i / (labels.length - 1)) * graphWidth - offsetX;
+                ctx.fillText(labels[i], labelX, graphHeight / 2 + 20);
+            }
+
+            ctx.strokeStyle = '#4CAF50';
+            ctx.lineWidth = 2;
+            ctx.stroke();
+        }
+
+        function pauseResume() {
+            isPaused = !isPaused;
+
+            if (!isPaused) {
+                updateSales();
+            }
+        }
+
+        function handleKeyPress(event) {
+            if (event.key === 'ArrowLeft') {
+                offsetX += 10;
+            } else if (event.key === 'ArrowRight') {
+                offsetX -= 10;
+            }
+        }
+        
+        //animation to
+        updateSales();
+
+        document.addEventListener('keydown', handleKeyPress);
+        canvas.addEventListener('click', pauseResume);
+    </script>
+</body>
+
+</html>

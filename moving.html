@@ -1,0 +1,73 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Crypto Bar Graph</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+
+        .graph-container {
+            width: 80%;
+            max-width: 800px;
+            overflow: hidden;
+            border: 1px solid #ccc;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            border-radius: 5px;
+        }
+
+        .bar {
+            height: 30px;
+            background-color: #4CAF50;
+            transition: width 0.5s ease-in-out;
+        }
+
+        .bar-label {
+            text-align: right;
+            padding: 10px;
+            font-weight: bold;
+        }
+    </style>
+</head>
+<body>
+    <div class="graph-container">
+        <div class="bar" id="crypto1"></div>
+        <div class="bar" id="crypto2"></div>
+        <div class="bar" id="crypto3"></div>
+        <!-- Add more bars as needed -->
+
+        <div class="bar-label">Crypto 1</div>
+        <div class="bar-label">Crypto 2</div>
+        <div class="bar-label">Crypto 3</div>
+        <!-- Add more labels as needed -->
+    </div>
+
+    <script>
+        function updateBars() {
+            // Simulate cryptocurrency price changes
+            const crypto1Price = Math.floor(Math.random() * 100);
+            const crypto2Price = Math.floor(Math.random() * 100);
+            const crypto3Price = Math.floor(Math.random() * 100);
+
+            // Update bar widths based on prices
+            document.getElementById('crypto1').style.width = crypto1Price + '%';
+            document.getElementById('crypto2').style.width = crypto2Price + '%';
+            document.getElementById('crypto3').style.width = crypto3Price + '%';
+
+            // Repeat the updateBars function every 1 second (1000 milliseconds)
+            setTimeout(updateBars, 1000);
+        }
+
+        // Initial call to start the animation
+        updateBars();
+    </script>
+</body>
+</html>

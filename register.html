@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="LAP.png">
+    <link rel="stylesheet" href="register.css" type="text/css">
+    <title>Register</title>
+</head>
+<body>
+    <div class="main">
+        <div class="register">
+            <h2>Register Here</h2>
+            <form id="register" onsubmit="return redirectToLogin()">
+                <label>First Name : </label>
+                <br>
+                <input type="text" name="fname" id="name" placeholder="Enter Your First Name" required>
+                <br><br>
+                <label>Last Name : </label>
+                <br>
+                <input type="text" name="lname" id="name" placeholder="Enter Your Last Name" required>
+                <br><br>
+                <label>Enter Your Age : </label>
+                <br>
+                <input type="number" name="age" id="name" placeholder="How old are you?" required>
+                <br><br>
+                <label>Email : </label>
+                <br>
+                <input type="email" name="email" id="name" placeholder="Enter Your Valid Email" required>
+                <br><br>
+                <label>Password : </label>
+                <br>
+                <input type="password" name="password" id="password" placeholder="Enter Your Password" required>
+                <br><br>
+                <label>Re-enter Password : </label>
+                <br>
+                <input type="password" name="reEnterPassword" id="reEnterPassword" placeholder="Re-enter Your Password" required>
+                <br><br>
+                <label>Gender : </label>
+                <br>
+                &nbsp;&nbsp;&nbsp;
+                <input type="radio" name="gender" id="male">
+                &nbsp;
+                <span id="male">Male</span>
+                &nbsp;&nbsp;&nbsp;&nbsp;
+                <input type="radio" name="gender" id="female">
+                &nbsp;
+                <span id="female">Female</span>
+                <br><br>
+                <input type="submit" value="Submit" name="submit" id="submit">
+            </form>
+        </div>
+    </div>
+
+    <script>
+        function redirectToLogin() {
+            var password = document.getElementById("password").value;
+            var reEnterPassword = document.getElementById("reEnterPassword").value;
+
+            if (password === reEnterPassword) {
+                alert("Registration Successful");
+                window.location.href = "login.html";
+                return false;
+            } else {
+                alert("Passwords do not match. Please re-enter your password.");
+                return false;
+            }
+        }
+    </script>
+
+</body>
+</html>

@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" type="x-icon" href="LAP.png">
+    <title>Customer Feedback</title>
+    <style>
+        body {
+            margin: 0;
+            padding: 0;
+            font-family: 'Poppins', sans-serif;
+            background-image: url('LAP.png');
+            background-size: cover;
+            background-position: center;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+        }
+
+        #feedback-form {
+            background-color: rgba(255, 255, 255, 0.9);
+            padding: 20px;
+            border-radius: 10px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
+            width: 300px;
+            text-align: center;
+        }
+
+        #feedback-form label {
+            display: block;
+            margin-top: 10px;
+        }
+
+        #feedback-form input,
+        #feedback-form textarea {
+            width: calc(100% - 20px);
+            padding: 8px;
+            margin-top: 5px;
+            margin-bottom: 15px;
+            box-sizing: border-box;
+        }
+
+        #feedback-form button {
+            background-color: #4CAF50;
+            color: white;
+            padding: 10px 15px;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+        }
+
+        #feedback-list {
+            margin-top: 20px;
+            max-width: 300px;
+            overflow-y: auto;
+            max-height: 300px;
+        }
+    </style>
+</head>
+<body>
+    <div id="feedback-form">
+        <h2>Customer Feedback</h2>
+        <form id="customerForm">
+            <label for="customerName">Name:</label>
+            <input type="text" id="customerName" required>
+            <label for="customerFeedback">Feedback:</label>
+            <textarea id="customerFeedback" rows="4" required></textarea>
+            <button type="button" onclick="submitFeedback()">Submit</button>
+        </form>
+        <div id="feedback-list"></div>
+    </div>
+
+    <script>
+        function submitFeedback() {
+            var name = document.getElementById("customerName").value;
+            var feedback = document.getElementById("customerFeedback").value;
+
+            if (name && feedback) {
+                var feedbackList = document.getElementById("feedback-list");
+                var feedbackItem = document.createElement("div");
+                feedbackItem.innerHTML = "<strong>" + name + ":</strong> " + feedback;
+                feedbackList.appendChild(feedbackItem);
+
+                
+                document.getElementById("customerForm").reset();
+                // pabalik sa main page
+                window.location.href = "index.html";
+            } else {
+                alert("Please fill in both name and feedback fields.");
+            }
+        }
+    </script>
+</body>
+</html>
